@@ -54,13 +54,40 @@ public class Practice03Test {
 
 	public int find_min_iterative () {
 		// TODO: Fill in this iterative function.
+		int minIndex = 0; // O(1) - Constant - Only happens once
+		for (int currentIndex = 1; currentIndex < arr.length; currentIndex++) { // O(1) since we only setup once
+			if (arr[currentIndex] < arr[minIndex]) { //O(n) since we perform this comparison the amount of times there are items, aka 'n'
+				minIndex = currentIndex; //O(n) Worst case we have to replace min value index every time
+			}
+		}
+
+		return minIndex; //O(1) - Constant - Only happens once
 	}
 
 
 	public int find_min_recursive () {
 		// TODO: Fill in this recursive function.
+		int minIndex = 0; // O(1) - Constant - Only happens once
+		int pleaseEnd = 1; // O(1) - Constant - Only happens once
+		return find_min_recursive(minIndex, arr, pleaseEnd); // O(1) - Constant - Only happens once
 	}
 
+	public int find_min_recursive(int minIndex, double[] arr, int pleaseEnd) { //O(1) * n(after first call) = O(n)
+		if (pleaseEnd == arr.length) { // O(n) Comparison happens n times
+			return minIndex; // O(1) - Constant - Once called, will never happen again
+		} else {
+			if (arr[pleaseEnd] < arr[minIndex]) { // O(n) - Worst cose scenario, happens for every item
+				minIndex = pleaseEnd; // O(n) - Worst case scenario, happens every time
+			}
+			return find_min_recursive(minIndex, arr, pleaseEnd+1); // O(n) - Worst case scenario, happens every time
+		}
+	}
+
+	/*
+		Iterative Total: O(1 + 1 + n + n) = O(2n + 2)
+		Recursive Total: O(1 + 1 + 1 + n + 1 + n + n + n) = O(4 + 4n)
+	
+	*/
 
 	/**
 	 * print_min: determines the min iteratively and recursively.
